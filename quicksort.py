@@ -90,12 +90,12 @@ def LumotoQuicksort(array, lo, hi):
 
 
 def medianThreePartition(array, low , high) -> int:
-    # print(array[low:high+1])
     if high-low+1>2:
         index = random.randint(low+1, high-1)
     else:
         return low
 
+    # MEDIAN INDEX
     if array[low]>=array[high] and array[low]>=array[index]:
         if array[index]>array[high]:
             return high
@@ -121,6 +121,8 @@ def medianQuicksort(array, lo, hi):
         medianQuicksort(array, lo, p - 1)
         medianQuicksort(array, p + 1, hi)
     return array
+
+
 
 
 def quicksort():
@@ -157,10 +159,3 @@ def quicksort():
          
 
 quicksort()
-
-
-
-# 40 2 5 86 21 10 88 29 6 8 17 100 43 87 
-# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-# 10 10 10 10 10 10 10 10 10 10 10 10 10
-# 10 20 15 19
