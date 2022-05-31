@@ -125,48 +125,9 @@ def medianQuicksort(array, lo, hi):
     return array
 
 
-
-def menu():
-    option=0
-    while(option != -1):
-
-        print("\n **** MAIN MENU *****\n")
-        print(" 1) QUICK SORT USING HOARE PARTITIONING")
-        print(" 2) QUICK SORT USING LUMOTO PARTITIONING")
-        print("-1) EXIT")
-        option = int(input(" ENTER YOUR OPTION : ").strip())
-
-        if option ==1:
-            print("\n **** QUICK SORT USING HOARE PARTITIONING *****\n")
-            ip_arr = list(map(int, input("ENTER THE LIST OF NUMBERS : ").split() ))
-            arr = randomiseArr(ip_arr)            
-            startHoare = time.perf_counter()
-            print("SORTED ARRAY USING HOARE : {s} ".format( s= " ".join( str(ele) for ele in  HoareQuicksort(arr, 0, len(arr) - 1))))
-            endHoare = time.perf_counter()
-            print(f"TIME ELAPSED FOR HOARE : {endHoare - startHoare:0.9f} seconds")
-
-        elif option ==2:
-            print("\n **** QUICK SORT USING LUMOTO PARTITIONING *****\n")
-            ip_arr = list(map(int, input("ENTER THE LIST OF NUMBERS : ").split() ))
-            arr = randomiseArr(ip_arr)
-            startLumoto = time.perf_counter()
-            print("SORTED ARRAY USING LUMOTO : {s} ".format( s= " ".join( str(ele) for ele in  LumotoQuicksort(arr, 0, len(arr) - 1))))
-            endLumoto = time.perf_counter()
-            print(f"TIME ELAPSED FOR LUMOTO : {endLumoto - startLumoto:0.9f} seconds")
-
-        
-        elif option == -1:
-            print("\n\n ***** EXIT *****")
-
-        else:
-            print("ENTER VALID OPTION!!"  )  
-
-
-
 def quicksort():
 
-    # menu()
-    N = 10
+    N = 500
     gen_arr = generateNum(N)
     arr = randomiseArr(gen_arr)
     # arr = list(map(int, input("ENTER THE LIST OF NUMBERS : ").split() ))
