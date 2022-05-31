@@ -4,8 +4,14 @@ import random
 
 def generateNum(N):
     arr=[]
+
+    # RANDOMLY
     for i in range(N):
         arr.append(random.randint(0, 10000))
+
+   
+    # DECREASING
+    # arr = [ele for ele in range(N, 0, -1) ]
 
     return arr
 
@@ -82,14 +88,6 @@ def LumotoQuicksort(array, lo, hi):
     return array
 
 
-def baseQuicksort(array, lo, hi):
-    if lo < hi:
-        p =lo+1
-        baseQuicksort(array, lo, p - 1)
-        baseQuicksort(array, p + 1, hi)
-    return array
-
-
 
 def medianThreePartition(array, low , high) -> int:
     # print(array[low:high+1])
@@ -98,21 +96,21 @@ def medianThreePartition(array, low , high) -> int:
     else:
         return low
 
-    if array[low]>array[high] and array[low]>array[index]:
+    if array[low]>=array[high] and array[low]>=array[index]:
         if array[index]>array[high]:
             return high
         else:
             return index
     
-    elif array[index]>array[high] and array[index]>array[low]:
+    elif array[index]>=array[high] and array[index]>=array[low]:
         if array[low]>array[high]:
             return high
         else:
             return low
 
-    elif array[high]>array[index] and array[high]>array[low]:
+    elif array[high]>=array[index] and array[high]>=array[low]:
         if array[index]>array[high]:
-            return high
+            return low
         else:
             return index
     
@@ -127,21 +125,16 @@ def medianQuicksort(array, lo, hi):
 
 def quicksort():
 
-    N = 500
-    gen_arr = generateNum(N)
-    arr = randomiseArr(gen_arr)
+    N = 200
+    arr = generateNum(N)
     # arr = list(map(int, input("ENTER THE LIST OF NUMBERS : ").split() ))
+
+    # RANDOMISE
+    # arr = randomiseArr(arr)
 
 
     print("\nNO. OF ELEMENTS : ", len(arr))
-    
-    startQuick = time.perf_counter()
-    quick_arr = baseQuicksort(arr, 0, len(arr) - 1)
-    endQuick = time.perf_counter()
-    # print("SORTED ARRAY USING BASE QUICKSORT : {s} ".format( s= " ".join( str(ele) for ele in  baseQuicksort(arr, 0, len(arr) - 1))))
-    print(f"TIME ELAPSED FOR SIMPLE QUICKSORT : {endQuick - startQuick:0.9f} seconds")
-
-    
+   
     startHoare = time.perf_counter()
     hoare_arr = HoareQuicksort(arr, 0, len(arr) - 1)
     endHoare = time.perf_counter()
