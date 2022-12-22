@@ -12,7 +12,7 @@
 ## RESULTS TABLE: 
 
 <img width="900" alt="Screenshot 2022-07-08 at 4 25 14 PM" src="https://user-images.githubusercontent.com/66678522/177980961-27e58e81-8f0f-40a8-849e-a4f1b4cc3a35.png">
-
+* <i>All the values are presented in seconds(time)</i>
 
 ## CONCLUSION
 Hence, median of 3 partitioning methods can be chosen for selecting the pivotal element in the quick sort as it helps to limit the worst-case of the problem. It is evident from the graphs in the previous sections that, Quicksort using Median of 3, gives a time complexity of O(n logn) even in the worst case where as Quicksort using Lumoto or Hoare’s partition runs in O(n2) time in for the worst-case inputs. When the elements are in random order the Quicksort using Hoare’s partition, Lumoto partition and Quicksort using Median of 3 all show a similar behavior giving a time complexity of O(n log n).
