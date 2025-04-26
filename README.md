@@ -1,6 +1,6 @@
 # Improvised QuickSort using Median of 3
 
-### **TIME COMPLEXITY:** O(nlog n)
+### **TIME COMPLEXITY:** O(n logn)
 
 _(Empirical speedups observed. No theoritcal proof to guaruntee it.)_
 
