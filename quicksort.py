@@ -157,6 +157,7 @@ def quicksort(N=100, order_type="random"):
 
     arr = generateNum(t, order_type)
     print("\nNO. OF ELEMENTS : ", N)
+    HoareTime, LumotoTime, MedianTime = 0, 0, 0
    
     # Make 3 copies
     arr_hoare = arr.copy()
@@ -169,17 +170,17 @@ def quicksort(N=100, order_type="random"):
     MedianTime = endMedian - startMedian
     print(f"TIME ELAPSED FOR MEDIAN : {MedianTime:0.9f} seconds")
 
-    startHoare = time.perf_counter()
-    hoare_arr = HoareQuicksort(arr_hoare, 0, len(arr_hoare) - 1)
-    endHoare = time.perf_counter()
-    HoareTime = endHoare - startHoare
-    print(f"TIME ELAPSED FOR HOARE : {HoareTime:0.9f} seconds")
+    # startHoare = time.perf_counter()
+    # hoare_arr = HoareQuicksort(arr_hoare, 0, len(arr_hoare) - 1)
+    # endHoare = time.perf_counter()
+    # HoareTime = endHoare - startHoare
+    # print(f"TIME ELAPSED FOR HOARE : {HoareTime:0.9f} seconds")
 
-    startLumoto = time.perf_counter()
-    lumotto_arr = LumotoQuicksort(arr_lumoto, 0, len(arr_lumoto) - 1)
-    endLumoto = time.perf_counter()
-    LumotoTime = endLumoto - startLumoto
-    print(f"TIME ELAPSED FOR LUMOTO : {LumotoTime:0.9f} seconds")
+    # startLumoto = time.perf_counter()
+    # lumotto_arr = LumotoQuicksort(arr_lumoto, 0, len(arr_lumoto) - 1)
+    # endLumoto = time.perf_counter()
+    # LumotoTime = endLumoto - startLumoto
+    # print(f"TIME ELAPSED FOR LUMOTO : {LumotoTime:0.9f} seconds")
 
 
     return HoareTime, LumotoTime, MedianTime
@@ -191,12 +192,13 @@ def quicksort(N=100, order_type="random"):
 ########################
 ########################
 
-TYPE="random"
+# TYPE="random"
 # TYPE = "ascending"
-# TYPE="descending"
+TYPE="descending"
 
-SIZES = [100, 200, 500, 700, 1000, 1500, 2000, 2500, 3000, 5000, 7000, 10000, 15000, 20000, 25000, 30000, 50000, 70000, 100000, 150000, 200000, 250000, 300000, 500000, 700000, 1000000, 1500000, 2000000, 2500000, 3000000, 5000000]
-# SIZES = [100, 200, 500, 700]
+# SIZES = [100, 200, 500, 700, 1000, 1500, 2000, 2500, 3000, 5000, 7000, 10000, 15000, 20000, 25000, 30000, 50000, 70000, 100000, 150000, 200000, 250000, 300000, 500000, 700000, 1000000, 1500000, 2000000, 2500000, 3000000, 5000000]
+
+SIZES = [100, 200, 500, 700]
 
 time_data = {"N": [], "HOARE": [], "LUMOTO": [], "MEDIAN": []}
 
