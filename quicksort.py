@@ -1,18 +1,46 @@
 import time
 import random
+import pandas as pd
+import matplotlib.pyplot as plt
+import os
 
 
-def generateNum(N):
+def makePlot(time_data, order_type):
+    df = pd.DataFrame(time_data)
+    df.set_index("N", inplace=True)
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(df.index, df["HOARE"], label="HOARE", marker='o')
+    plt.plot(df.index, df["LUMOTO"], label="LUMOTO", marker='o')
+    plt.plot(df.index, df["MEDIAN"], label="MEDIAN", marker='o')
+
+    plt.title(f"TIME REQUIRED V.S ARRAY SIZE ({order_type.upper()} ORDERED)")
+    plt.xlabel("NO. OF ELEMENTS")
+    plt.ylabel("TIME ELAPSED (seconds)")
+    plt.legend()
+    plt.grid()
+
+    
+    os.makedirs("plots", exist_ok=True)
+    plt.savefig(f"plots/quicksort_{order_type}.png")
+    plt.show()
+
+
+
+def generateNum(N, order_type="random"):
     arr=[]
 
-    # RANDOMLY
-    for i in range(N):
-        arr.append(random.randint(0, 10000))
+    if order_type=="random": # RANDOMLY
+        for i in range(N):
+            arr.append(random.randint(0, 10000))
 
-   
-    # DECREASING
-    # arr = [ele for ele in range(N, 0, -1) ]
+    elif order_type=="descending": #DECREASING
+        arr = [ele for ele in range(N, 0, -1) ]
 
+    else: #INCREASING
+        arr = [ele for ele in range(1, N+1) ]
+    
+    
     return arr
 
 
@@ -125,37 +153,64 @@ def medianQuicksort(array, lo, hi):
 
 
 
-def quicksort():
+def quicksort(N=100, order_type="random"):
 
-    N = 200
-    arr = generateNum(N)
-    # arr = list(map(int, input("ENTER THE LIST OF NUMBERS : ").split() ))
-
-    # RANDOMISE
-    # arr = randomiseArr(arr)
-
-
-    print("\nNO. OF ELEMENTS : ", len(arr))
+    arr = generateNum(t, order_type)
+    print("\nNO. OF ELEMENTS : ", N)
    
-    startHoare = time.perf_counter()
-    hoare_arr = HoareQuicksort(arr, 0, len(arr) - 1)
-    endHoare = time.perf_counter()
-    # print("SORTED ARRAY USING HOARE : {s} ".format( s= " ".join( str(ele) for ele in  HoareQuicksort(arr, 0, len(arr) - 1))))
-    print(f"TIME ELAPSED FOR HOARE : {endHoare - startHoare:0.9f} seconds")
-
-
-    startLumoto = time.perf_counter()
-    lumotto_arr  =LumotoQuicksort(arr, 0, len(arr) - 1)
-    endLumoto = time.perf_counter()
-    # print("SORTED ARRAY USING LUMOTO : {s} ".format( s= " ".join( str(ele) for ele in  LumotoQuicksort(arr, 0, len(arr) - 1))))
-    print(f"TIME ELAPSED FOR LUMOTO : {endLumoto - startLumoto:0.9f} seconds")
-
+    # Make 3 copies
+    arr_hoare = arr.copy()
+    arr_lumoto = arr.copy()
+    arr_median = arr.copy()
 
     startMedian = time.perf_counter()
-    median_arr = medianQuicksort(arr, 0, len(arr) - 1)
+    median_arr = medianQuicksort(arr_median, 0, len(arr_median) - 1)
     endMedian = time.perf_counter()
-    # print("SORTED ARRAY USING MEDIAN : {s} ".format( s= " ".join( str(ele) for ele in  medianQuicksort(arr, 0, len(arr) - 1))))
-    print(f"TIME ELAPSED FOR Median : {endMedian - startMedian:0.9f} seconds")
-         
+    MedianTime = endMedian - startMedian
+    print(f"TIME ELAPSED FOR MEDIAN : {MedianTime:0.9f} seconds")
 
-quicksort()
+    startHoare = time.perf_counter()
+    hoare_arr = HoareQuicksort(arr_hoare, 0, len(arr_hoare) - 1)
+    endHoare = time.perf_counter()
+    HoareTime = endHoare - startHoare
+    print(f"TIME ELAPSED FOR HOARE : {HoareTime:0.9f} seconds")
+
+    startLumoto = time.perf_counter()
+    lumotto_arr = LumotoQuicksort(arr_lumoto, 0, len(arr_lumoto) - 1)
+    endLumoto = time.perf_counter()
+    LumotoTime = endLumoto - startLumoto
+    print(f"TIME ELAPSED FOR LUMOTO : {LumotoTime:0.9f} seconds")
+
+
+    return HoareTime, LumotoTime, MedianTime
+
+
+
+
+
+########################
+########################
+
+TYPE="random"
+# TYPE = "ascending"
+# TYPE="descending"
+
+SIZES = [100, 200, 500, 700, 1000, 1500, 2000, 2500, 3000, 5000, 7000, 10000, 15000, 20000, 25000, 30000, 50000, 70000, 100000, 150000, 200000, 250000, 300000, 500000, 700000, 1000000, 1500000, 2000000, 2500000, 3000000, 5000000]
+# SIZES = [100, 200, 500, 700]
+
+time_data = {"N": [], "HOARE": [], "LUMOTO": [], "MEDIAN": []}
+
+for t in SIZES:
+    
+    HoareTime, LumotoTime, MedianTime = quicksort(t, order_type=TYPE)
+
+    time_data["N"].append(t)
+    time_data["HOARE"].append(HoareTime)
+    time_data["LUMOTO"].append(LumotoTime)
+    time_data["MEDIAN"].append(MedianTime)
+
+# print("\n\n", time_data)
+makePlot(time_data, order_type=TYPE)
+
+
+
