@@ -1,4 +1,4 @@
-# Improvised QuickSort using Median of 3
+# Improvised QuickSort using Median of Three
 
 ### **TIME COMPLEXITY:** O(n logn)
 
@@ -175,3 +175,8 @@ It is clearly evident MedianOfThree obtains massive speed-ups w.r.t. Lumoto and 
 Hence, MedianofThree method offers a faster improvement over the traditional quicksort variants by simply adding a pivot selection step. Empirically, we obtained ~80x speedups(Pre-sorted elements) and ~2.5x(randomised elements) on arrays with just 700 elements. It is clearly evident from the plots that the speedups are supermodular function of array size and we obtained even greater speedups for larger arrays. Potential future works can focus on (1) theoritically prooving the worst case time complexity of the algorithm (2) analysis study on the impact of Median beam (e.g. median-of-5, median-of7, etc) in terms of overhead for pivot selection v.s. performance gains.
 
 With our results, we have successfully determined that the selection of pivot as median enhances the efficiency of the quicksort algorithm.
+
+
+
+
+
